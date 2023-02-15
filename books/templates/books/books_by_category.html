@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Books in this category</h2>
+
+<div class="row lastBooksContainer">
+    {% for book in book_list %}
+
+    <div class="col-md-4 bookCard">
+        <div class="cardBorder">
+            <img class="book_image" src="{{ book.image.url }}" alt="Book image">
+            <p>{{ book.title }}</p>
+            <p>{{ book.author }}</p>
+            <p>{{ book.description }}</p>
+            <a href="{% url 'bookDetail' slug=book.slug %}"><button class="btn btn-primary bt-xs">Book Details</button></a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4 bookDetailLeftSide">
+        <img class="bookImage" src="{{ book.image.url }}" alt=""> <br>
+        {% if book.book_amount > 0 %}
+        <h5><strong>Available Book amount :</strong> {{ book.book_amount }}</h5>
+        {% if user.is_authenticated %}
+        <a href="{% url 'confirm_rent_view' slug=book.slug %}"><button class="btn btn-primary btn-xs">Rent</button></a>
+        {% else %}
+        <a href="{% url 'confirm_rent_view' slug=book.slug %}"><button class="btn btn-primary btn-xs">Login to rent
+                book</button></a>
+        {% endif %}
+        {% else %}
+        <h5><strong>Available Book amount : </strong>none</h5>
+        {% endif %} <br>
+        
+    </div>
+    <div class="col-md-8">
+        <h5><strong>{{ book.title }}</strong> </h5>
+        <h5><strong>Author:</strong> {{ book.author }}</h5>
+        <h5><strong>Category:</strong> {{ book.category }}</h5>
+        <h6><strong>Desciption:</strong> </h6>
+        <p> {{ book.description }}</p>
+        <hr class="my-4">
+    </div>
+</div>
+
+{% endblock content %}
