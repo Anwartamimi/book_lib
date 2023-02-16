@@ -38,14 +38,11 @@ class BookRentHistory(models.Model):
     book = models.ForeignKey(Book, on_delete=models.PROTECT, editable=False)
     user = models.ForeignKey(User, on_delete=models.PROTECT, editable=False, related_name='books')
     rent_date = models.DateField(auto_now_add=True, editable=False)
-    back_date = models.DateField(default=datetime.now()+timedelta(days=30))
+    back_date = models.DateField(default=datetime.now()+timedelta(days=7))
         
     @property
     def how_many_days(self):
         return str(self.back_date - datetime.now().date())[:2]
-
-   
-    
      
 
 class InboxMessage(models.Model):

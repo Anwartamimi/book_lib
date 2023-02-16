@@ -17,7 +17,8 @@ class HomeListView(ListView):
 
     def get_queryset(self):
         queryset = super(HomeListView, self).get_queryset()
-        return queryset.all().order_by('-id')[:9]
+        return queryset.all().order_by('-id')[:5]
+        
 
 
 class BooksListView(ListView):
@@ -25,7 +26,7 @@ class BooksListView(ListView):
     template_name = 'books/books.html'
     
     def get_queryset(self):
-        return Book.objects.order_by('-id')[:3]
+        return Book.objects.order_by('-id')[:10]
 
 
 class SearchBookListView(ListView):
@@ -49,7 +50,6 @@ class BookDetailView(DetailView):
     def get_success_url(self):
         return reverse('bookDetail', kwargs={'slug': self.object.slug})
 
-    
 
 class CategoryBookListView(ListView):
     model = Category
@@ -69,7 +69,7 @@ def confirm_rent_view(request, slug):
                 request, f'You cant rent this book')
             return redirect('bookDetail', slug=b.slug)
     except Book.DoesNotExist:
-        raise Http404("We ont have this book")
+        raise Http404("We dont have this book")
     return render(request, 'books/confirm_rent_view.html', {'book': b})
 
 

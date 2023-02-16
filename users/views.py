@@ -15,7 +15,6 @@ class SignUpView(SuccessMessageMixin ,CreateView):
     success_message = 'Successfully registered'
 
 class UserDetailView(LoginRequiredMixin, TemplateView):
-    book_list = Book.objects.all()
     login_url = "login"
     template_name = 'users/user_detail.html'
 
