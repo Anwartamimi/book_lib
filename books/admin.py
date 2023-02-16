@@ -5,7 +5,7 @@ from .models import Book, Category, BookRentHistory, InboxMessage
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category',)
-    fields = ('category', )
+    fields = ('category',)
 
 
 @admin.register(Book)

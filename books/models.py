@@ -18,7 +18,7 @@ class Category(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(unique=True)
-    description = models.TextField(max_length=1000, default='About book')
+    description = models.TextField(max_length=1000, default="About book")
     image = models.ImageField(
         default='default_book.png', upload_to='books_pics')
     author = models.CharField(max_length=100)
@@ -36,16 +36,13 @@ class Book(models.Model):
     
 class BookRentHistory(models.Model):
     book = models.ForeignKey(Book, on_delete=models.PROTECT, editable=False)
-    user = models.ForeignKey(User, on_delete=models.PROTECT, editable=False)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, editable=False, related_name='books')
     rent_date = models.DateField(auto_now_add=True, editable=False)
     back_date = models.DateField(default=datetime.now()+timedelta(days=30))
-
-    def __str__(self):
-        return f'{self.book.title}'
         
     @property
     def how_many_days(self):
-        return (self.back_date - datetime.now().date())[:2]
+        return str(self.back_date - datetime.now().date())[:2]
 
    
     
